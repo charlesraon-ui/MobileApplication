@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import authController from './controllers/authController.js';
+import { register, login } from 'C:/Users/Richard John Raon/GOAT-App/backend/controllers/authController.js';
+
 
 dotenv.config();
 
