@@ -1,0 +1,28 @@
+/* App.css - cleaned and customized */
+
+/* Root container */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Utility card */
+.card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Custom horizontal scrollbar */
+.custom-scrollbar::-webkit-scrollbar { height: 8px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background-color: #f3f4f6; }
+
+/* Helper */
+.read-the-docs { color: #888; }
+
+/* Modal fade */
+.modal-overlay { transition: opacity 0.3s ease; }
+
