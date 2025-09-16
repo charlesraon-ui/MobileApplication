@@ -1,23 +1,24 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, default: "user" }, // You can assign different roles (e.g., admin, user)
-});
+    name: {type: String},
+    email: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
+    address: {type: String},
+    role: {type: String, enum:["admin"]},
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
+     // Loyalty fields
+    loyaltyPoints: { type: Number, default: 0 },
+    loyaltyTier: { type: String, enum: ["Sprout", "Seedling", "Cultivator", "Bloom", "Harvester"], default: "Sprout" },
+    loyaltyHistory: [
+    {
+      action: { type: String }, // "earned" | "redeemed"
+      points: { type: Number },
+      date: { type: Date, default: Date.now }
+    }
+     ]
+})
 
-userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
-
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema)
 
 export default User;

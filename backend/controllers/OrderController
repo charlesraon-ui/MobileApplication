@@ -1,0 +1,27 @@
+const Order = require('../models/Order');
+const Cart = require('../models/Cart');
+const Order = await Order.find(query)
+      .populate("user", "name email loyaltyPoints loyaltyTier")
+      .populate("products.product", "name price category"); // ← (category helps if populated)
+
+exports.createOrder = async (req, res) => {
+    try {
+        const order = new Order(req.body);
+        await order.save();
+        // Clear the cart after placing the order
+        await Cart.deleteOne({ userId: req.body.userId });
+        res.status(201).json(order);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.getOrders = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const orders = await Order.find({ userId }).sort({ timestamp: -1 });
+        res.status(200).json(orders);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};

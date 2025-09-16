@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import User from '../models/User';
 import productController from '../controllers/productController.js';
 import cartController from '../controllers/cartController.js';
 import orderController from '../controllers/orderController.js';
